@@ -45,4 +45,4 @@ const produtores = {
   ],
 };
 
-export default produtores;
+export {produtores};
