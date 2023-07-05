@@ -1,15 +1,9 @@
 /* eslint-disable prettier/prettier */
 // import {Topo} from './components/Topo';
-import {Produtores} from './components/Produtores';
-import Topo from './components/TopoClass';
+import Produtores from './components/Produtores';
 
 function Home() {
-  return (
-    <>
-      <Topo />
-      <Produtores />
-    </>
-  );
+  return <Produtores />;
 }
 
 export {Home};

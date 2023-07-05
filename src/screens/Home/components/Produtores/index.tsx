@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
-import {Text} from 'react-native';
-
-import {carregaProdutores} from '../../../services/dataLoad';
+import {FlatList} from 'react-native';
+import {Item} from './Item';
+import {carregaProdutores} from '../../../../services/dataLoad';
 import {useEffect, useState} from 'react';
+import {Titulo} from './Titulo';
 
 interface Produtores {
   titulo: string;
@@ -27,16 +28,20 @@ function Produtores() {
     ],
   });
   useEffect(() => {
-    const produtoresLoaded = carregaProdutores();
+    const produtoresLoaded: Produtores = carregaProdutores();
     setProdutores(produtoresLoaded);
     console.log(produtores);
   }, [produtores]);
-
   return (
     <>
-      <Text>{produtores.titulo}</Text>
+      <FlatList
+        data={produtores.lista}
+        renderItem={({item}) => <Item nome={item.nome} />}
+        keyExtractor={({nome}) => nome}
+        ListHeaderComponent={<Titulo title={produtores.titulo} />}
+      />
     </>
   );
 }
 
-export {Produtores};
+export default Produtores;
