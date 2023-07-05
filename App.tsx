@@ -5,6 +5,7 @@ function App() {
   return (
     <SafeAreaView style={styles.screen}>
       <Home />
+      {/* <Produtores /> */}
     </SafeAreaView>
   );
 }

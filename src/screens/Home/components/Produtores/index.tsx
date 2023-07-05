@@ -33,14 +33,19 @@ function Produtores() {
     console.log(produtores);
   }, [produtores]);
   return (
-    <>
-      <FlatList
-        data={produtores.lista}
-        renderItem={({item}) => <Item nome={item.nome} />}
-        keyExtractor={({nome}) => nome}
-        ListHeaderComponent={<Titulo title={produtores.titulo} />}
-      />
-    </>
+    <FlatList
+      data={produtores.lista}
+      renderItem={({item}) => (
+        <Item
+          nome={item.nome}
+          distancia={item.distancia}
+          estrelas={item.estrelas}
+          imagem={item.imagem}
+        />
+      )}
+      keyExtractor={({nome}) => nome}
+      ListHeaderComponent={<Titulo title={produtores.titulo} />}
+    />
   );
 }
 
