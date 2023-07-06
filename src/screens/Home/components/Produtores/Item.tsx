@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Estrelas} from '../../../../components/Estrelas';
+import {useState} from 'react';
 
 interface ItemProps {
   nome?: string;
@@ -9,14 +11,26 @@ interface ItemProps {
 }
 
 function Item({nome, imagem = null, distancia = '', estrelas = 0}: ItemProps) {
+  const [selected, setSelected] = useState<boolean>(false);
   return (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        setSelected(!selected);
+      }}>
       <Image source={imagem} accessibilityLabel={nome} style={styles.imagem} />
       <View style={styles.data}>
-        <Text style={styles.name}>{nome}</Text>
+        <View>
+          <Text style={styles.name}>{nome}</Text>
+          <Estrelas
+            quantidadeOriginal={estrelas}
+            editavel={selected}
+            grande={selected}
+          />
+        </View>
         <Text style={styles.distance}>{distancia}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
