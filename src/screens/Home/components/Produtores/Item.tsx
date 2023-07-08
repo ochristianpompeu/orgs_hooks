@@ -1,17 +1,26 @@
 /* eslint-disable prettier/prettier */
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Estrelas} from '../../../../components/Estrelas';
-import {useReducer} from 'react';
+import {useMemo, useReducer} from 'react';
 
 interface ItemProps {
   nome?: string;
   imagem?: any;
-  distancia?: string;
+  distancia?: number;
   estrelas?: number;
 }
 
-function Item({nome, imagem = null, distancia = '', estrelas = 0}: ItemProps) {
+const distanciaEmMetros = (distancia: number) => {
+  return `${distancia}m`;
+};
+
+function Item({nome, imagem = null, distancia = 0, estrelas = 0}: ItemProps) {
   const [selected, invertSelected] = useReducer(selected => !selected, false);
+  const distanciaTexto = useMemo(
+    () => distanciaEmMetros(distancia),
+    [distancia],
+  );
+
   return (
     <TouchableOpacity style={styles.item} onPress={invertSelected}>
       <Image source={imagem} accessibilityLabel={nome} style={styles.imagem} />
@@ -24,7 +33,7 @@ function Item({nome, imagem = null, distancia = '', estrelas = 0}: ItemProps) {
             grande={selected}
           />
         </View>
-        <Text style={styles.distance}>{distancia}</Text>
+        <Text style={styles.distance}>{distanciaTexto}</Text>
       </View>
     </TouchableOpacity>
   );

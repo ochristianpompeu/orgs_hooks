@@ -5,7 +5,7 @@ import {carregaProdutores} from '../services/dataLoad';
 interface Produtor {
   nome: string;
   imagem: any;
-  distancia: string;
+  distancia: number;
   estrelas: number;
 }
 interface Produtores {
@@ -20,6 +20,9 @@ function useProdutores() {
 
   useEffect(() => {
     const produtoresLoaded: Produtores = carregaProdutores();
+    produtoresLoaded.lista.sort(
+      (produtor1, produtor2) => produtor1.distancia - produtor2.distancia,
+    );
     setProdutores(produtoresLoaded);
   }, []);
   return [produtores];

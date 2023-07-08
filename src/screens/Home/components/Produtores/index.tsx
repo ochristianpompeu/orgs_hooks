@@ -9,7 +9,7 @@ interface Produtores {
   lista: {
     nome: string;
     imagem: any;
-    distancia: string;
+    distancia: number;
     estrelas: number;
   }[];
 }
