@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 import {FlatList} from 'react-native';
 import {Item} from './Item';
-import {carregaProdutores} from '../../../../services/dataLoad';
-import {useEffect, useState} from 'react';
 import {Titulo} from './Titulo';
+import {useProdutores} from '../../../../hooks/useProdutores';
 
 interface Produtores {
   titulo: string;
@@ -16,22 +15,8 @@ interface Produtores {
 }
 
 function Produtores() {
-  const [produtores, setProdutores] = useState<Produtores>({
-    titulo: '',
-    lista: [
-      {
-        nome: '',
-        imagem: '',
-        distancia: '',
-        estrelas: 0,
-      },
-    ],
-  });
-  useEffect(() => {
-    const produtoresLoaded: Produtores = carregaProdutores();
-    setProdutores(produtoresLoaded);
-    console.log(produtores);
-  }, [produtores]);
+  const [produtores] = useProdutores();
+
   return (
     <FlatList
       data={produtores.lista}
