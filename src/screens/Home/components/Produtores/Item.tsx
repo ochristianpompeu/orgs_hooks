@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Estrelas} from '../../../../components/Estrelas';
-import {useState} from 'react';
+import {useReducer} from 'react';
 
 interface ItemProps {
   nome?: string;
@@ -11,13 +11,9 @@ interface ItemProps {
 }
 
 function Item({nome, imagem = null, distancia = '', estrelas = 0}: ItemProps) {
-  const [selected, setSelected] = useState<boolean>(false);
+  const [selected, invertSelected] = useReducer(selected => !selected, false);
   return (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => {
-        setSelected(!selected);
-      }}>
+    <TouchableOpacity style={styles.item} onPress={invertSelected}>
       <Image source={imagem} accessibilityLabel={nome} style={styles.imagem} />
       <View style={styles.data}>
         <View>
